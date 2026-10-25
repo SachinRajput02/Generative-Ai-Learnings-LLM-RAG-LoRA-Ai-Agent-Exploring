@@ -139,6 +139,7 @@ class DeepNeuralNetworkRunner:
                 self.optimizer.step()
                 train_losses.append(loss.item())
 
+
             # Validation
             self.model.eval()
             with torch.no_grad():
