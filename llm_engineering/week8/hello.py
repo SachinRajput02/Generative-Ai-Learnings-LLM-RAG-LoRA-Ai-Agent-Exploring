@@ -1,3 +1,5 @@
+# hello.py
+
 import modal
 from modal import Image
 
@@ -22,7 +24,7 @@ def hello() -> str:
 # New - added thanks to student Tue H.!
 
 
-@app.function(image=image, region="eu")
+@app.function(image=image, region="ap")
 def hello_europe() -> str:
     import requests
 

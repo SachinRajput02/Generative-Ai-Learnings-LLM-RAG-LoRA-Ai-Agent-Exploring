@@ -4,7 +4,7 @@ import os
 
 load_dotenv(override=True)
 
-DEFAULT_MODEL_NAME = os.getenv("PRICER_PREPROCESSOR_MODEL", "ollama/llama3.2")
+DEFAULT_MODEL_NAME = os.getenv("PRICER_PREPROCESSOR_MODEL", "ollama/llama3.2:1b")
 DEFAULT_REASONING_EFFORT = "low" if "gpt-oss" in DEFAULT_MODEL_NAME else None
 
 SYSTEM_PROMPT = """Create a concise description of a product. Respond only in this format. Do not include part numbers.
@@ -13,6 +13,7 @@ Category: eg Electronics
 Brand: Brand name
 Description: 1 sentence description
 Details: 1 sentence on features"""
+
 
 
 class Preprocessor:
@@ -30,6 +31,7 @@ class Preprocessor:
         self.base_url = base_url
         if "ollama" in model_name and not base_url:
             self.base_url = "http://localhost:11434"
+
 
     def messages_for(self, text: str) -> list[dict]:
         return [{"role": "system", "content": SYSTEM_PROMPT}, {"role": "user", "content": text}]
