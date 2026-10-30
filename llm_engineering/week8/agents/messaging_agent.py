@@ -10,7 +10,7 @@ pushover_url = "https://api.pushover.net/1/messages.json"
 class MessagingAgent(Agent):
     name = "Messaging Agent"
     color = Agent.WHITE
-    MODEL = "anthropic/claude-haiku-5-5"
+    MODEL = "openai/gpt-5-nano"
 
     def __init__(self):
         """
@@ -21,7 +21,7 @@ class MessagingAgent(Agent):
         self.log("Messaging Agent is initializing")
         self.pushover_user = os.getenv("PUSHOVER_USER", "your-pushover-user-if-not-using-env")
         self.pushover_token = os.getenv("PUSHOVER_TOKEN", "your-pushover-user-if-not-using-env")
-        self.log("Messaging Agent has initialized Pushover and Claude")
+        self.log("Messaging Agent has initialized Pushover and OpenAI API")
 
     def push(self, text):
         """
@@ -66,7 +66,7 @@ class MessagingAgent(Agent):
         """
         Make an alert about the specified details
         """
-        self.log("Messaging Agent is using Claude to craft the message")
+        self.log("Messaging Agent is using OpenAI API to craft the message")
         text = self.craft_message(description, deal_price, estimated_true_value)
         self.push(text[:200] + "... " + url)
         self.log("Messaging Agent has completed")
